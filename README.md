@@ -1,5 +1,5 @@
 # ParticleSimulation
-A visualisator of particle interactions, based on an ideal gas model ([see wikipedia](https://en.wikipedia.org/wiki/Ideal_gas)). The simulation can be ran on either a CPU or a GPU.
+A visualisator of particle interactions, based on an ideal gas model ([see wikipedia](https://en.wikipedia.org/wiki/Ideal_gas)). The simulation can be run on either a CPU or a GPU.
 
 * 2021: First version 
 * 2023: Second version. Written from scratch, added CUDA module
