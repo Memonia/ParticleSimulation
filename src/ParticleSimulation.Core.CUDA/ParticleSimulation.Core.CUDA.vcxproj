@@ -23,6 +23,10 @@
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.5.props" />
+  </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -39,12 +43,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>obj\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir).artifacts\bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir).artifacts\obj\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>obj\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir).artifacts\bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir).artifacts\obj\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -63,15 +67,14 @@
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
-      <CodeGeneration>compute_50,sm_50</CodeGeneration>
+      <CodeGeneration>compute_52,sm_52</CodeGeneration>
       <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
       <MaxRegCount>64</MaxRegCount>
       <PtxAsOptionV>true</PtxAsOptionV>
     </CudaCompile>
     <PostBuildEvent>
-      <Command>mkdir $(SolutionDir)lib
-copy $(OutDirFullPath)$(TargetName)$(TargetExt) $(SolutionDir)lib\$(TargetName)$(TargetExt) 
-</Command>
+      <Command>mkdir "$(SolutionDir).artifacts\lib"
+copy "$(OutDirFullPath)$(TargetName)$(TargetExt)" "$(SolutionDir).artifacts\lib\$(TargetName)$(TargetExt)"      </Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>
@@ -105,15 +108,14 @@ copy $(OutDirFullPath)$(TargetName)$(TargetExt) $(SolutionDir)lib\$(TargetName)$
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
-      <CodeGeneration>compute_50,sm_50</CodeGeneration>
+      <CodeGeneration>compute_52,sm_52</CodeGeneration>
       <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
       <MaxRegCount>64</MaxRegCount>
       <FastMath>false</FastMath>
     </CudaCompile>
     <PostBuildEvent>
-      <Command>mkdir $(SolutionDir)lib
-copy $(OutDirFullPath)$(TargetName)$(TargetExt) $(SolutionDir)lib\$(TargetName)$(TargetExt) 
-</Command>
+      <Command>mkdir "$(SolutionDir).artifacts\lib"
+copy "$(OutDirFullPath)$(TargetName)$(TargetExt)" "$(SolutionDir).artifacts\lib\$(TargetName)$(TargetExt)"      </Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>
@@ -133,13 +135,9 @@ copy $(OutDirFullPath)$(TargetName)$(TargetExt) $(SolutionDir)lib\$(TargetName)$
     <ClInclude Include="cuda_macros.cuh" />
     <ClInclude Include="simulation.h" />
     <ClInclude Include="structures.cuh" />
-  </ItemGroup>  
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.5.props" />
-  </ImportGroup>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-    <ImportGroup Label="ExtensionTargets">
+  <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.5.targets" />
-  </ImportGroup>  
+  </ImportGroup>
 </Project>
