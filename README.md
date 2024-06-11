@@ -11,7 +11,7 @@ A visualisator of particle interactions, based on an ideal gas model ([see wikip
  CUDA Toolkit installer takes care of setting up Visual Studio. [See the installation guide.](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/)
 
 ## Possible problems
-### ParticleSimulation.Core.CUDA failing to load
+### ParticleSimulation.Core.Cuda failing to load
  CUDA project will fail to load if the installed CUDA Toolkit version doesn't match exactly the one specified in the .vcxproj file of the project. In this case open the mentioned file and look for the following items:
 ```
   <ImportGroup Label="ExtensionSettings">
