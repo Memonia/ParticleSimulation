@@ -1,7 +1,9 @@
-#include "structures.cuh"
-#include "simulation.h"
-
 #define EXPORT __declspec(dllexport)
+
+#include "Simulator.h"
+#include "SimulatorInfoOut.h"
+#include "SimulationStateOut.h"
+#include "Collidables.cuh"
 
 extern "C" 
 {

@@ -10,11 +10,36 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Collidables.cuh" />
+    <ClInclude Include="CollisionInfo.cuh" />
+    <ClInclude Include="collisions.cuh" />
+    <ClInclude Include="cuda_macros.cuh" />
+    <ClInclude Include="Particle.cuh" />
+    <ClInclude Include="SimulationState.h" />
+    <ClInclude Include="SimulationStateOut.h" />
+    <ClInclude Include="Simulator.h" />
+    <ClInclude Include="SimulatorInfoOut.h" />
+    <ClInclude Include="StraightLine.cuh" />
+    <ClInclude Include="Surface.cuh" />
+    <ClInclude Include="Vector.cuh" />
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="collisions.cu" />
+    <CudaCompile Include="kernels.cu" />
+    <CudaCompile Include="Particle.cu" />
+    <CudaCompile Include="StraightLine.cu" />
+    <CudaCompile Include="Surface.cu" />
+    <CudaCompile Include="Vector.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="export.cpp" />
+    <ClCompile Include="Simulator.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B0B81BC1-D90A-4515-89A1-BB2AF1FD0E62}</ProjectGuid>
-    <RootNamespace>ParticleSimulation_Core_CUDA</RootNamespace>
+    <ProjectGuid>e552016b-76ae-4e4c-9287-1325482a0674</ProjectGuid>
+    <RootNamespace>ParticleSimulation_Core_Cuda</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>ParticleSimulation.Core.CUDA</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -23,10 +48,6 @@
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.5.props" />
-  </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -34,6 +55,10 @@
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.5.props" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -43,12 +68,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir).artifacts\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir).artifacts\obj\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>$(ProjectDir)bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir).artifacts\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir).artifacts\obj\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>$(ProjectDir)bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -61,28 +86,20 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <EntryPointSymbol>
-      </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
+      <MaxRegCount>64</MaxRegCount>
       <CodeGeneration>compute_52,sm_52</CodeGeneration>
       <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
-      <MaxRegCount>64</MaxRegCount>
-      <PtxAsOptionV>true</PtxAsOptionV>
+      <CompileOut>$(OutDirFullPath)\%(Filename)%(Extension).obj</CompileOut>
+      <KeepDir>$(OutDirFullPath)int</KeepDir>
     </CudaCompile>
     <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir).artifacts\lib"
-copy "$(OutDirFullPath)$(TargetName)$(TargetExt)" "$(SolutionDir).artifacts\lib\$(TargetName)$(TargetExt)"      </Command>
+      <Command>mkdir "$(SolutionDir)lib"
+copy "$(OutDirFullPath)$(TargetName)$(TargetExt)" "$(SolutionDir)lib\$(TargetName)$(TargetExt)" </Command>
     </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>
-      </Message>
-    </PostBuildEvent>
-    <CudaLink>
-      <GPUDebugInfo>true</GPUDebugInfo>
-    </CudaLink>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -92,9 +109,6 @@ copy "$(OutDirFullPath)$(TargetName)$(TargetExt)" "$(SolutionDir).artifacts\lib\
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;WIN64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <FloatingPointModel>Precise</FloatingPointModel>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -102,40 +116,21 @@ copy "$(OutDirFullPath)$(TargetName)$(TargetExt)" "$(SolutionDir).artifacts\lib\
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <EntryPointSymbol>
-      </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
+      <MaxRegCount>64</MaxRegCount>
       <CodeGeneration>compute_52,sm_52</CodeGeneration>
       <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
-      <MaxRegCount>64</MaxRegCount>
-      <FastMath>false</FastMath>
+      <CompileOut>$(OutDirFullPath)\%(Filename)%(Extension).obj</CompileOut>
+      <KeepDir>$(OutDirFullPath)int</KeepDir>
     </CudaCompile>
     <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir).artifacts\lib"
-copy "$(OutDirFullPath)$(TargetName)$(TargetExt)" "$(SolutionDir).artifacts\lib\$(TargetName)$(TargetExt)"      </Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>
-      </Message>
+      <Command>mkdir "$(SolutionDir)lib"
+copy "$(OutDirFullPath)$(TargetName)$(TargetExt)" "$(SolutionDir)lib\$(TargetName)$(TargetExt)" </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <CudaCompile Include="collision_detection.cu" />
-    <CudaCompile Include="kernels.cu" />
-    <ClCompile Include="collision_resolution.cpp" />
-    <ClCompile Include="export.cpp" />
-    <ClCompile Include="simulation.cpp" />
-    <CudaCompile Include="structures.cu" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="collisions.cuh" />
-    <ClInclude Include="cuda_macros.cuh" />
-    <ClInclude Include="simulation.h" />
-    <ClInclude Include="structures.cuh" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.5.targets" />

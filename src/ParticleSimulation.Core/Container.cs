@@ -1,8 +1,9 @@
-﻿using ParticleSimulation.Core.Collisions;
-using ParticleSimulation.Core.Interface;
-using ParticleSimulation.Core.Objects;
-using ParticleSimulation.Utils;
-using ParticleSimulation.Utils.Math;
+﻿using System;
+using System.Collections.Generic;
+
+using ParticleSimulation.Core.Abstractions;
+using ParticleSimulation.Core.Simulation;
+using ParticleSimulation.Core.Utils;
 
 namespace ParticleSimulation.Core
 {
@@ -47,7 +48,7 @@ namespace ParticleSimulation.Core
 			foreach (var p in _particles)
 			{
 				// if overlaps with any other particle
-				if (MathUtils.Distance(center, p.Center) <= r + p.R)
+				if (CustomMath.Distance(center, p.Center) <= r + p.R)
 				{
 					goto getNewCenter;
 				}

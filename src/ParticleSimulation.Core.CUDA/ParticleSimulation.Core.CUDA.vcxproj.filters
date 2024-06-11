@@ -1,45 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CudaCompile Include="collision_detection.cu">
-      <Filter>Source</Filter>
-    </CudaCompile>
-    <CudaCompile Include="kernels.cu">
-      <Filter>Source</Filter>
-    </CudaCompile>
-    <CudaCompile Include="structures.cu">
-      <Filter>Source</Filter>
-    </CudaCompile>
+    <Filter Include="Header">
+      <UniqueIdentifier>{3aa27467-516a-4677-8a2e-6fe3d087dede}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderCuda">
+      <UniqueIdentifier>{fc6c9306-9b76-467d-ada9-280f22e06987}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="simulation.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="collision_resolution.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="export.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="simulation.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="SimulationState.h">
+      <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="structures.cuh">
-      <Filter>Headers</Filter>
+    <ClInclude Include="SimulationStateOut.h">
+      <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="cuda_macros.cuh">
-      <Filter>Headers</Filter>
+    <ClInclude Include="Simulator.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SimulatorInfoOut.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Collidables.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionInfo.cuh">
+      <Filter>HeaderCuda</Filter>
     </ClInclude>
     <ClInclude Include="collisions.cuh">
-      <Filter>Headers</Filter>
+      <Filter>HeaderCuda</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Headers">
-      <UniqueIdentifier>{e162e785-7b32-4895-ba02-534b7d3f0f61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source">
-      <UniqueIdentifier>{e28ac808-20e3-4f73-b288-76b3d90fac9e}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="cuda_macros.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="StraightLine.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="Surface.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

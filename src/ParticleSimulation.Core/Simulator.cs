@@ -1,10 +1,13 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Threading;
 
-using ParticleSimulation.Core.Collisions;
+using ParticleSimulation.Core.Abstractions;
 using ParticleSimulation.Core.Extensions;
-using ParticleSimulation.Core.Interface;
+using ParticleSimulation.Core.Simulation;
 
-using static ParticleSimulation.Core.Collisions.CollisionResolution;
+using static ParticleSimulation.Core.Simulation.CollisionResolution;
 
 namespace ParticleSimulation.Core
 {
@@ -36,7 +39,7 @@ namespace ParticleSimulation.Core
 
 		public Simulator(Container container, int queueSize = 256)
 		{
-			_waitHandle = new(true);	
+			_waitHandle = new(true);
 			_detector = new();
 			_commitQueue = new();
 			_container = container;

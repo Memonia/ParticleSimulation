@@ -1,8 +1,11 @@
 #ifndef	COLLISIONS_CUH
 #define COLLISIONS_CUH
 
-#include "structures.cuh"
 #include "cuda_macros.cuh"
+#include "Surface.cuh"
+#include "Particle.cuh"
+#include "Collidables.cuh"
+#include "CollisionInfo.cuh"
 
 CollisionInfo detectNearestAndAdvanceCuda(const Collidables& collidables, double frameTime);
 

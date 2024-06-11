@@ -1,4 +1,7 @@
-﻿using ParticleSimulation.Core.Objects;
+﻿using System.Collections.Generic;
+using System.Linq;
+
+using ParticleSimulation.Core.Simulation;
 
 namespace ParticleSimulation.Core.Extensions
 {

@@ -1,5 +1,4 @@
-using ParticleSimulation.Core.Collisions;
-using ParticleSimulation.Core.Objects;
+using ParticleSimulation.Core.Simulation;
 
 namespace ParticleSimulation.Core.Tests
 {
@@ -139,7 +138,7 @@ namespace ParticleSimulation.Core.Tests
 				double expected_time = 0;
 
 				bool res = _detector.IsCollisionDetected(p, wall, out double time);
-				
+
 				Assert.Equal(expected_res, res);
 				Assert.Equal(expected_time, time);
 			}

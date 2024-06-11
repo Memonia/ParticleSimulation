@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
 
-using ParticleSimulation.Core.Interface;
-using ParticleSimulation.Core.Native;
+using Microsoft.Extensions.Configuration;
+
+using ParticleSimulation.Core.Abstractions;
 
 namespace ParticleSimulation.Core
 {

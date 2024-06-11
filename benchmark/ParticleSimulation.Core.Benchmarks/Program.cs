@@ -1,8 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 
-using ParticleSimulation.Core.Interface;
-using ParticleSimulation.Core.Native;
+using ParticleSimulation.Core.Abstractions;
 
 namespace ParticleSimulation.Core.Benchmarks
 {
@@ -75,7 +74,7 @@ namespace ParticleSimulation.Core.Benchmarks
 
 		static void Main(string[] args)
 		{
-			var res = BenchmarkRunner.Run<CollisionDetectionBenchmarks>();
+			BenchmarkRunner.Run<CollisionDetectionBenchmarks>();
 		}
 	}
 }

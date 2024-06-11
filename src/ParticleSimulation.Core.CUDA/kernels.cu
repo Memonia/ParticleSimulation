@@ -6,7 +6,10 @@
 #include "device_launch_parameters.h"
 
 #include "collisions.cuh"
-#include "structures.cuh"
+#include "Particle.cuh"
+#include "Surface.cuh"
+#include "Collidables.cuh"
+#include "CollisionInfo.cuh"
 
 __global__
 void moveParticlesKernel(
@@ -21,8 +24,7 @@ void moveParticlesKernel(
 }
 
 __global__
-void nearestParticleCollisionKernel(
-    Particle* particles, int particleCount, CollisionInfo* out)
+void nearestParticleCollisionKernel(Particle* particles, int particleCount, CollisionInfo* out)
 {
     int j = blockIdx.x;
     int i = threadIdx.x;
@@ -42,9 +44,7 @@ void nearestParticleCollisionKernel(
 }
 
 __global__
-void nearestSurfaceCollisionKernel(
-    Surface* surfaces, int surfaceCount,
-    Particle* particles, int particleCount, CollisionInfo* out)
+void nearestSurfaceCollisionKernel(Surface* surfaces, int surfaceCount, Particle* particles, int particleCount, CollisionInfo* out)
 {
     int j = blockIdx.x;
     int i = threadIdx.x;
@@ -212,9 +212,7 @@ CollisionInfo detectNearestAndAdvanceCuda(const Collidables& collidables, double
         auto devParticles = cudaMallocHelper<Particle>(size);
 
         // A block of N threads for N particles
-        moveParticlesKernel<<<1, collidables.ParticleCount>>>(
-            devParticles, collidables.ParticleCount, frameTime
-        );
+        moveParticlesKernel<<<1, collidables.ParticleCount>>>(devParticles, collidables.ParticleCount, frameTime);
 
         cudaStatus = cudaGetLastError();
         if (cudaStatus != cudaSuccess)
@@ -233,6 +231,6 @@ Return:
     return *found;
 
 Error:
-    fprintf(stderr, "Error in CUDA: %s\n", cudaGetErrorString(cudaStatus));
+    fprintf(stderr, "Error in Cuda: %s\n", cudaGetErrorString(cudaStatus));
     goto Return;
 }
