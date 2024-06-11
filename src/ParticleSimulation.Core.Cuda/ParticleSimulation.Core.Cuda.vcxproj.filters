@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{3aa27467-516a-4677-8a2e-6fe3d087dede}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderCuda">
+      <UniqueIdentifier>{fc6c9306-9b76-467d-ada9-280f22e06987}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SimulationState.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SimulationStateOut.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Simulator.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SimulatorInfoOut.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Collidables.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionInfo.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="collisions.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="cuda_macros.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="StraightLine.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="Surface.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.cuh">
+      <Filter>HeaderCuda</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
